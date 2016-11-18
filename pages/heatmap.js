@@ -45,7 +45,7 @@ var dayLabels = svg.selectAll(".dayLabel")
 var weekLabels = svg.selectAll(".weekLabel")
 .data(days)
 .enter().append("text")
-.text(function(d) { return d; })
+.text(function(d) { return 'w' + d; })
 .attr("x", function(d, i) { return i * gridSize + 2*picW + 100; })
 .attr("y", 0)
 .style("text-anchor", "middle")
@@ -224,15 +224,6 @@ d3.selectAll('.weekLabel')
     });
 
 
-//d3.selectAll('.dayLabel')
-//    .attr("pointer-events", "none")
-//    .on("click", function(d, i)
-//        {
-//            Move(i);
-//        })
-
-
-
 
 ////////////////////Control the Circles/////////////////////
         
@@ -283,69 +274,67 @@ var filter = svg.append("defs")
 
 
 function update()
-   {
+{
+    randData();
+   //console.log(data);
 
-        randData();
-       console.log(data);
-
-
-       var circles = svg.selectAll('circle')
-        .data(data, function (d, i) { return d[2];});
+   var circles = svg.selectAll('circle')
+    .data(data, function (d, i) { return d[2];});
 
 
-       //update old
-        circles.transition()
-        .duration(1000)
-        .attr('class', 'circle')
-        .attr("cx", function (d)
-        {
-            return xScale(d[1]);
-        })
-        .attr("cy", function (d)
-        {
-            return yScale(d[1]);
-        });
+   //update old
+    circles.transition()
+    .duration(1000)
+    .attr('class', 'circle')
+    .attr("cx", function (d)
+    {
+        return xScale(d[1]);
+    })
+    .attr("cy", function (d)
+    {
+        return yScale(d[1]);
+    });
 
 
-       //enter new
-        circles.enter()
-        .append("circle")
-        .attr('class', 'circle')
+   //enter new
+    circles.enter()
+    .append("circle")
+    .attr('class', 'circle')
+    .transition()
+    .duration(1000)
+    .attr("cx", function (d)
+    {
+        return xScale(d[1]) + Math.floor((Math.random() * 10) -4);
+    })
+    .attr("cy", function (d)
+    {
+        return yScale(d[1]) + Math.floor((Math.random() * 10) -4);
+    })
+    .attr("r", function(d)
+    {
+        return 2*(5-Math.sqrt(d[0]));
+
+    })
+    .attr("fill", function(d)
+    {
+       // return "rgb(30," + (256-(d[1]) * 5) +", " + (256-(d[1]) * 2) + ")";
+        return painScale(d[0]);
+    })
+    .attr("opacity", function(d)
+    {
+        //return '1';
+        return 0.5 + 0.06* d[0];
+    })
+    .attr("filter", "url(#blur)");
+
+   circles.exit()
         .transition()
-        .duration(1000)
-        .attr("cx", function (d)
-        {
-            return xScale(d[1]) + Math.floor((Math.random() * 6) -3);
-        })
-        .attr("cy", function (d)
-        {
-            return yScale(d[1]) + Math.floor((Math.random() * 6) -3);
-        })
-        .attr("r", function(d)
-        {
-            return 2*(5-Math.sqrt(d[0]));
-            
-        })
-        .attr("fill", function(d)
-        {
-           // return "rgb(30," + (256-(d[1]) * 5) +", " + (256-(d[1]) * 2) + ")";
-            return painScale(d[0]);
-        })
-        .attr("opacity", function(d)
-        {
-            //return '1';
-            return 0.5 + 0.06* d[0];
-        })
-        .attr("filter", "url(#blur)");
+        .duration(500)
+        .ease('circle')
+        .style("r", 0)
+        .remove();
 
-       circles.exit()
-            .transition()
-            .duration(500)
-            .ease('circle')
-            .style("r", 0)
-            .remove();
-
-    }
+}
 
 
 cells.on('click',  function() {

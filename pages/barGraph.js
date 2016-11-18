@@ -243,36 +243,37 @@ function updateBar()
 
 
     //enter new
-    rects.enter()
-        .append("rect")
-        .attr('class', 'bar')
-        .attr("fill", function(d)
-        {
-            return "rgb(50," + (256-Math.round((maxY-d[1])/maxY * 256 * 2)) +", " +  150 + ")";
-        })
-    
-        .transition()
-        .duration(500)
-        .attr("x", function (d, i)
-        {
-            return xScale2(d[0]);
-        })
-        .attr("y", function (d)
-        {
-            return yScale2(d[1]);
-        })
-        .attr("width", function(d)
-        {
-           return (width * 0.6)/data.length;
-        })
-        .attr("height", function(d)
-        {
-            return height - yScale2(d[1]);
-        })
-        .attr('index', function(d, i)
-        {
-            return i;
-        });
+//    
+//    rects.enter()
+//        .append("rect")
+//        .attr('class', 'bar')
+//        .attr("fill", function(d)
+//        {
+//            return "rgb(50," + (256-Math.round((maxY-d[1])/maxY * 256 * 2)) +", " +  150 + ")";
+//        })
+//    
+//        .transition()
+//        .duration(500)
+//        .attr("x", function (d, i)
+//        {
+//            return xScale2(d[0]);
+//        })
+//        .attr("y", function (d)
+//        {
+//            return yScale2(d[1]);
+//        })
+//        .attr("width", function(d)
+//        {
+//           return (width * 0.6)/data.length;
+//        })
+//        .attr("height", function(d)
+//        {
+//            return height - yScale2(d[1]);
+//        })
+//        .attr('index', function(d, i)
+//        {
+//            return i;
+//        });
 
      texts
         .data(data)
