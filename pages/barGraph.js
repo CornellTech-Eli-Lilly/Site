@@ -1,15 +1,20 @@
-var svg2 = d3.select("#bar-chart")
-    .append('svg')
-    .attr('width', 600)
-    .attr("height", 300)
-    .attr("class", "chart");
-
 var margin = {
     top: 50,
     right: 105,
     bottom: 50,
     left: 75
 };
+
+
+var width = 850 - margin.left - margin.right;
+var height = 500 - margin.top - margin.bottom;
+
+var svg2 = d3.select("#bar-chart")
+    .append('svg')
+    .attr('width', 600)
+    .attr("height", 300)
+    .attr("class", "chart");
+
 
 var months = ['Jan.', 'Feb.', 'Mar.', 'Apr.', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
 var days = ['Sun.','Mon.','Tue.','Wed.','Thu.','Fri.','Sat.'];
@@ -35,9 +40,6 @@ function makeData(x, y)
 
 var data = makeData(months, m_steps);
 
-
-var width = 900 - margin.left - margin.right;
-var height = 500 - margin.top - margin.bottom;
 
 
 var xScale2 = d3.scale.ordinal()
