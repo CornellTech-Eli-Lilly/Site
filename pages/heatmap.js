@@ -296,7 +296,7 @@ function update()
        //update old
         circles.transition()
         .duration(1000)
-        .attr('class', 'bar')
+        .attr('class', 'circle')
         .attr("cx", function (d)
         {
             return xScale(d[1]);
@@ -310,7 +310,7 @@ function update()
        //enter new
         circles.enter()
         .append("circle")
-        .attr('class', 'bar')
+        .attr('class', 'circle')
         .transition()
         .duration(1000)
         .attr("cx", function (d)

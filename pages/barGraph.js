@@ -98,7 +98,6 @@ chart.selectAll('rect')
     })
     .attr("fill", function(d)
     {
-       // return "rgb(99, 200, " + (d.height) + ")";
         return "rgb(50," + (256-Math.round((maxY-d[1])/maxY * 256 * 2)) +", " +  150 + ")";
     });
 
@@ -185,14 +184,13 @@ function changeScale() {
     }
     
     data = makeData(dataSet[counter][0], dataSet[counter][1]);
-    //console.log("length" +dataSet[counter][0].length);
-    update();
+    updateBar();
 }
 
 
 
 
-function update() 
+function updateBar() 
 {
     
    xScale2 = d3.scale.ordinal()
@@ -201,13 +199,15 @@ function update()
 
    maxY = d3.max(data, function (d) 
     {
-       console.log(d[0]);
        return d[1];
    });
     
    yScale2 = d3.scale.linear()
+   //.domain([maxY*0.5, maxY])
        .domain([0, maxY])
        .range([height, 0]);
+    
+    
     
     xAxis2 = d3.svg.axis()
     .scale(xScale2)
@@ -221,23 +221,20 @@ function update()
        .data(data);
     
     
+    //update old
     rects.transition()
         .duration(1000)
-        .attr('class', 'bar')
         .attr("x", function (d)
-            {
-                //console.log("X: " + d[0]);
-                //console.log(xScale2(d[0]));
-                return xScale2(d[0]);
-            })
+        {
+            return xScale2(d[0]);
+        })
         .attr("y", function (d)
         {
-            console.log("X: " + d[0]);
             return yScale2(d[1]);
         })
         .attr("width", function(d)
         {
-           return (width * 0.5)/data.length;
+           return (width * 0.6)/data.length;
         })
         .attr("height", function(d)
         {
@@ -247,21 +244,26 @@ function update()
 
     //enter new
     rects.enter()
-        .append("circle")
+        .append("rect")
         .attr('class', 'bar')
+        .attr("fill", function(d)
+        {
+            return "rgb(50," + (256-Math.round((maxY-d[1])/maxY * 256 * 2)) +", " +  150 + ")";
+        })
+    
         .transition()
-        .duration(1000)
+        .duration(500)
         .attr("x", function (d, i)
-            {
-                return xScale2(d[0]);
-            })
+        {
+            return xScale2(d[0]);
+        })
         .attr("y", function (d)
         {
             return yScale2(d[1]);
         })
         .attr("width", function(d)
         {
-           return (width * 0.5)/data.length;
+           return (width * 0.6)/data.length;
         })
         .attr("height", function(d)
         {
@@ -270,11 +272,6 @@ function update()
         .attr('index', function(d, i)
         {
             return i;
-        })
-        .attr("fill", function(d)
-        {
-           // return "rgb(99, 200, " + (d.height) + ")";
-            return "rgb(50," + (256-Math.round((maxY-d[1])/maxY * 256 * 2)) +", " +  150 + ")";
         });
 
      texts
@@ -324,7 +321,7 @@ function update()
         .call(yAxis2);
   
     
-    d3.selectAll(".bar")
-        .on("click", changeScale);
+    
+        rects.on("click", changeScale);
 
 }
