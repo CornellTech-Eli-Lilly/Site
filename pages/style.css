@@ -1,0 +1,119 @@
+  rect.bordered {
+  stroke: #E6E6E6;
+  stroke-width:2px;   
+}
+
+text.mono {
+  font-size: 9pt;
+  font-family: Consolas, courier;
+  fill: #000;
+}
+
+
+  .event 
+  {
+      cursor: pointer;
+  }
+
+  .cell
+  {
+      cursor: pointer;
+  }
+        
+
+.pic-circle{
+    border-radius: 50%;
+}
+.portrait
+{
+    margin-left: 2px;
+    margin-right: 9px;
+    margin-top: 12px;
+ 
+}
+.logo
+{
+/*    padding-left: 10px;*/
+    margin-left: 15px;
+    margin-top: 2px;
+}
+.bar:hover {
+          fill: navy;
+        }
+    
+svg {
+  font: 10px sans-serif;
+}
+
+.axis2 path,
+.axis2 line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+
+.x.axis2 path {
+      display: none;
+    }
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke-width: .5px;
+}
+
+.x.axis path {
+  stroke: #000;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .5;
+}
+
+.y.axis line {
+  stroke: #ddd;
+}
+
+path.line {
+  fill: none;
+  stroke: navy;
+  stroke-width: .5px;
+}
+
+rect.pane {
+  cursor: move;
+  fill: none;
+  pointer-events: all;
+}
+
+
+.graphName {
+    border-radius: 6px;
+  font-family: sans-serif;
+  color: white;
+  font-size: 150%;
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  white-space: nowrap;
+  float: none;
+  text-decoration: none;
+  background-color: steelblue;
+}
+
+.page-header
+{
+  font-family: "Georgia";
+  font-size: 330%;
+}
+    
+/*
+    p:hover {
+      background-color: green;
+    }
+*/
