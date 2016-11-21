@@ -16,6 +16,9 @@ colors.reverse();
     // alternatively colorbrewer.YlGnBu[9]
     days = d3.range(1, 6);
 
+
+var ClickCount = 0;
+
 var weekdays = ["Mon", "Tue", "Wen", "Thr", "Fri", "Sat", "Sun"];
 
 var picW = 125,
@@ -72,7 +75,7 @@ var DayPercentByStu = []
 
 for (var i = 0; i < 31; i ++)
 {
-    DayPercentByStu.push(Math.floor(Math.random() * 9) + 2);
+    DayPercentByStu.push( (i + Math.floor(Math.random() * 16) + 1)/4);
 }
 
 var cells = svg.selectAll ("rect")      //Draw Colored Cells
@@ -99,10 +102,10 @@ cells.enter()
         })      
     .attr("data-toggle", "popover")
     .attr("data-placement", "bottom")
-//    .attr("data-content",  function (d, i)
-//         {
-//            return "Day " + ((i % 41) + 1) + ", "+ " Earned " + Math.round (d*100) + "% possible grade. Running Total: " + Math.round(runningDayTotalByStu[i] * 100);
-//        })
+    .attr("data-content",  function (d, i)
+         {
+            return d;
+        })
     .attr("data-container", 'body')
     .style("fill", colors[0]);
 
@@ -239,8 +242,10 @@ function randData()
                
     for (var i = 0; i < num; i ++)
     {
-        data.push([Math.floor((Math.random() * 10) + 1), Math.floor(Math.random() * 12), dict[i]]);
+        data.push([ Math.floor((Math.random() * 9) + 2), Math.floor(Math.random() * 12), dict[i]]);
     }
+    //ClickCount++;
+    //console.log(ClickCount);
 }
 
 
@@ -270,7 +275,7 @@ var filter = svg.append("defs")
   .append("feGaussianBlur")
     .attr("stdDeviation", 0.7);
 
-//update();
+update();
 
 
 function update()
